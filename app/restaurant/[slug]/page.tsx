@@ -1,47 +1,22 @@
-import Link from 'next/link';
-
 import NavBar from '@/app/components/NavBar';
+
+import Header from './components/Header';
+import Rating from './components/Rating';
+import RestaurantNavBar from './components/RestaurantNavBar';
+import RestaurantTitle from './components/RestaurantTitle';
 
 const RestaurantDetails = () => {
   return (
     <main className='bg-gray-100 min-h-screen w-screen'>
       <main className='max-w-screen-2xl m-auto bg-white'>
         <NavBar />
-        {/* HEADER */}
-        <div className='h-96 overflow-hidden'>
-          <div className='bg-center bg-gradient-to-r from-[#0f1f47] to-[#5f6984] h-full flex justify-center items-center'>
-            <h1 className='text-7xl text-white captitalize text-shadow text-center'>
-              Milestones Grill
-            </h1>
-          </div>
-        </div>
-        {/* HEADER */} {/* DESCRIPTION PORTION */}
+        <Header />
+        {/* DESCRIPTION PORTION */}
         <div className='flex m-auto w-2/3 justify-between items-start 0 -mt-11'>
           <div className='bg-white w-[70%] rounded p-3 shadow'>
-            {/* RESAURANT NAVBAR */}
-            <nav className='flex text-reg border-b pb-2'>
-              <Link href='/restaurant/milestone-grill' className='mr-7'>
-                Overview
-              </Link>
-              <Link href='/restaurant/milestone-grill/menu' className='mr-7'>
-                Menu
-              </Link>
-            </nav>
-            {/* RESAURANT NAVBAR */} {/* TITLE */}
-            <div className='mt-4 border-b pb-6'>
-              <h1 className='font-bold text-6xl'>Milesstone Grill</h1>
-            </div>
-            {/* TITLE */} {/* RATING */}
-            <div className='flex items-end'>
-              <div className='ratings mt-2 flex items-center'>
-                <p>*****</p>
-                <p className='text-reg ml-3'>4.9</p>
-              </div>
-              <div>
-                <p className='text-reg ml-4'>600 Reviews</p>
-              </div>
-            </div>
-            {/* RATING */} {/* DESCRIPTION */}
+            <RestaurantNavBar />
+            <RestaurantTitle />
+            <Rating /> {/* DESCRIPTION */}
             <div className='mt-4'>
               <p className='text-lg font-light'>
                 The classics you love prepared with a perfect twist, all served
