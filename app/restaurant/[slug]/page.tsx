@@ -6,6 +6,10 @@ import RestaurantNavBar from './components/RestaurantNavBar';
 import RestaurantTitle from './components/RestaurantTitle';
 import Reviews from './components/Reviews';
 
+export const metadata = {
+  title: 'Milestones Grill | OpenTable',
+};
+
 const RestaurantDetails = () => {
   return (
     <>
