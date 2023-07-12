@@ -5,10 +5,10 @@ export const metadata = {
   title: 'Menu of Milestones Grill | OpenTable',
 };
 
-const RestaurantMenu = () => {
+const RestaurantMenu = ({ slug }: { slug: string }) => {
   return (
     <div className='bg-white w-[100%] rounded p-3 shadow'>
-      <RestaurantNavBar />
+      <RestaurantNavBar slug={slug} />
       <Menu />
     </div>
   );
