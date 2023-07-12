@@ -1,4 +1,5 @@
 import { RestaurantDetail } from '@/models/restaurant';
+import { Params } from '@/types/params';
 import { PrismaClient } from '@prisma/client';
 import Description from './components/Description';
 import Images from './components/Images';
@@ -8,8 +9,12 @@ import RestaurantNavBar from './components/RestaurantNavBar';
 import RestaurantTitle from './components/RestaurantTitle';
 import Reviews from './components/Reviews';
 
-export const metadata = {
-  title: 'Milestones Grill | OpenTable',
+export const generateMetadata = ({ params }: Params) => {
+  const { slug } = params;
+
+  return {
+    title: `${slug} | OpenTable`,
+  };
 };
 
 const prisma = new PrismaClient();
@@ -37,18 +42,10 @@ const fetchRestaurantBySlug = async (
   return restaurant;
 };
 
-interface Params {
-  params: {
-    slug: string;
-  };
-}
-
 const RestaurantDetails = async ({ params }: Params) => {
   const { slug } = params;
 
   const restaurant = await fetchRestaurantBySlug(slug);
-
-  console.log({ restaurant });
 
   return (
     <>
