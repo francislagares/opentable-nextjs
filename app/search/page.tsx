@@ -1,5 +1,7 @@
-import Header from '@/components/Header';
 import { PrismaClient } from '@prisma/client';
+
+import Header from '@/components/Header';
+import { SearchParams } from '@/types/searchParams';
 import RestaurantCard from './components/RestaurantCard';
 import SearchSideBar from './components/SearchSideBar';
 
@@ -38,17 +40,20 @@ const fetchCuisines = async () => {
   return prisma.cuisine.findMany();
 };
 
-const Search = async ({ searchParams }: { searchParams: { city: string } }) => {
+const Search = async ({ searchParams }: { searchParams: SearchParams }) => {
   const restaurants = await fetchRestaurantByCity(searchParams.city);
   const location = await fetchLocations();
   const cuisine = await fetchCuisines();
 
-  console.log({ restaurants });
   return (
     <>
       <Header />
       <div className='flex py-4 m-auto w-2/3 justify-between items-start'>
-        <SearchSideBar locations={location} cuisines={cuisine} />
+        <SearchSideBar
+          locations={location}
+          cuisines={cuisine}
+          searchParams={searchParams}
+        />
         <div className='w-5/6'>
           {restaurants.length ? (
             <>
