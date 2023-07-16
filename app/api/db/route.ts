@@ -4,13 +4,13 @@ import { NextRequest, NextResponse } from 'next/server';
 const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest, res: NextResponse) {
-  //   await prisma.table.deleteMany();
-  // await prisma.review.deleteMany();
+  // await prisma.table.deleteMany();
+  await prisma.review.deleteMany();
   await prisma.item.deleteMany();
   await prisma.restaurant.deleteMany();
   await prisma.location.deleteMany();
   await prisma.cuisine.deleteMany();
-  // await prisma.user.deleteMany();
+  await prisma.user.deleteMany();
 
   await prisma.location.createMany({
     data: [{ name: 'ottawa' }, { name: 'toronto' }, { name: 'niagara' }],
@@ -1032,270 +1032,270 @@ export async function GET(req: NextRequest, res: NextResponse) {
     ],
   });
 
-  //   const userLaith = await prisma.user.create({
-  //     data: {
-  //       first_name: "Laith",
-  //       last_name: "Harb",
-  //       email: "laith@hotmail.com",
-  //       city: "ottawa",
-  //       password: "$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu",
-  //       phone: "1112223333",
-  //     },
-  //   });
+  const userLaith = await prisma.user.create({
+    data: {
+      firstName: 'Laith',
+      lastName: 'Harb',
+      email: 'laith@hotmail.com',
+      city: 'ottawa',
+      password: '$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu',
+      phone: '1112223333',
+    },
+  });
 
-  //   const userJosh = await prisma.user.create({
-  //     data: {
-  //       first_name: "Josh",
-  //       last_name: "Allen",
-  //       email: "josh@hotmail.com",
-  //       city: "toronto",
-  //       password: "$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu",
-  //       phone: "1112223333",
-  //     },
-  //   });
+  const userJosh = await prisma.user.create({
+    data: {
+      firstName: 'Josh',
+      lastName: 'Allen',
+      email: 'josh@hotmail.com',
+      city: 'toronto',
+      password: '$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu',
+      phone: '1112223333',
+    },
+  });
 
-  //   const userLebron = await prisma.user.create({
-  //     data: {
-  //       first_name: "LeBron",
-  //       last_name: "James",
-  //       email: "lebron@hotmail.com",
-  //       city: "niagara",
-  //       password: "$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu",
-  //       phone: "1112223333",
-  //     },
-  //   });
+  const userLebron = await prisma.user.create({
+    data: {
+      firstName: 'LeBron',
+      lastName: 'James',
+      email: 'lebron@hotmail.com',
+      city: 'niagara',
+      password: '$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu',
+      phone: '1112223333',
+    },
+  });
 
-  //   const userCassidy = await prisma.user.create({
-  //     data: {
-  //       first_name: "Cassidy",
-  //       last_name: "Marksom",
-  //       email: "cassidy@hotmail.com",
-  //       city: "toronto",
-  //       password: "$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu",
-  //       phone: "1112223333",
-  //     },
-  //   });
+  const userCassidy = await prisma.user.create({
+    data: {
+      firstName: 'Cassidy',
+      lastName: 'Marksom',
+      email: 'cassidy@hotmail.com',
+      city: 'toronto',
+      password: '$2b$10$I8xkU2nQ8EAHuVOdbMy9YO/.rSU3584Y.H4LrpIujGNDtmny9FnLu',
+      phone: '1112223333',
+    },
+  });
 
-  //   await prisma.review.createMany({
-  //     data: [
-  //       {
-  //         first_name: "Laith",
-  //         last_name: "Harb",
-  //         text: "This place is amazing, it has some of the best dishes in the world. It is so so so good!!!",
-  //         rating: 5,
-  //         restaurantId: vivaanId,
-  //         user_id: userLaith.id,
-  //       },
-  //       {
-  //         first_name: "Laith",
-  //         last_name: "Harb",
-  //         text: "This food is so good! It is the fanciest thing I have ever seen in my short life",
-  //         rating: 5,
-  //         restaurantId: bluRistoranteId,
-  //         user_id: userLaith.id,
-  //       },
-  //       {
-  //         first_name: "Laith",
-  //         last_name: "Harb",
-  //         text: "Excellent food and service. Busy night, but everything was great! Highly recommend.",
-  //         rating: 5,
-  //         restaurantId: elCatrinId,
-  //         user_id: userLaith.id,
-  //       },
-  //       {
-  //         first_name: "Laith",
-  //         last_name: "Harb",
-  //         text: "Very nice place for a date night, the service was fast and friendly. The food was amazing.",
-  //         rating: 4,
-  //         restaurantId: stelvioId,
-  //         user_id: userLaith.id,
-  //       },
-  //       {
-  //         first_name: "Laith",
-  //         last_name: "Harb",
-  //         text: "Extremely disappointing in our experience.",
-  //         rating: 2,
-  //         restaurantId: laBartolaId,
-  //         user_id: userLaith.id,
-  //       },
-  //       {
-  //         first_name: "Laith",
-  //         last_name: "Harb",
-  //         text: "This place is amazing, it has some of the best dishes in the world. It is so so so good!!!",
-  //         rating: 5,
-  //         restaurantId: elCatrinId,
-  //         user_id: userLaith.id,
-  //       },
-  //       {
-  //         first_name: "Laith",
-  //         last_name: "Harb",
-  //         text: "As always, food was excellent. Waitress was friendly and prompt. We had just one problem in that our dessert order went rogue in the system and we waited ages for it to arrive.",
-  //         rating: 5,
-  //         restaurantId: kamasutraIndianId,
-  //         user_id: userLaith.id,
-  //       },
-  //       {
-  //         first_name: "Laith",
-  //         last_name: "Harb",
-  //         text: "Restaurant was loud and crowded. Food is not worth the price.",
-  //         rating: 3,
-  //         restaurantId: eldoradoTacoId,
-  //         user_id: userLaith.id,
-  //       },
-  //       {
-  //         first_name: "Josh",
-  //         last_name: "Allen",
-  //         text: "A Christmas lunch with clients served by a friendly server with a good wine selection everyone enjoyed the appetizers and meals",
-  //         rating: 4,
-  //         restaurantId: vivaanId,
-  //         user_id: userJosh.id,
-  //       },
-  //       {
-  //         first_name: "Josh",
-  //         last_name: "Allen",
-  //         text: "The food was very tasty, the price is a little high so a place to go only for special occasions",
-  //         rating: 5,
-  //         restaurantId: sofiaId,
-  //         user_id: userJosh.id,
-  //       },
-  //       {
-  //         first_name: "Josh",
-  //         last_name: "Allen",
-  //         text: "Had a great time at Chops. Our server Dane was super friendly. Dinner was delicious as always.",
-  //         rating: 3,
-  //         restaurantId: curryishTavernId,
-  //         user_id: userJosh.id,
-  //       },
-  //       {
-  //         first_name: "Josh",
-  //         last_name: "Allen",
-  //         text: "The service was poor as we had to wait a long time for our food. There were some issues but were dealt with in a proper manner.",
-  //         rating: 3,
-  //         restaurantId: adrakYorkvilleId,
-  //         user_id: userJosh.id,
-  //       },
-  //       {
-  //         first_name: "Josh",
-  //         last_name: "Allen",
-  //         text: "Wonderful food and service.",
-  //         rating: 5,
-  //         restaurantId: coconutLagoonId,
-  //         user_id: userJosh.id,
-  //       },
-  //       {
-  //         first_name: "Josh",
-  //         last_name: "Allen",
-  //         text: "Great food, great staff. You can’t ask for much more from a restaurant.",
-  //         rating: 5,
-  //         restaurantId: bluRistoranteId,
-  //         user_id: userJosh.id,
-  //       },
-  //       {
-  //         first_name: "LeBron",
-  //         last_name: "James",
-  //         text: "Wonderful service! Delicious food! Comfortable seating and luxurious atmosphere.",
-  //         rating: 5,
-  //         restaurantId: RamaKrishnaId,
-  //         user_id: userLebron.id,
-  //       },
-  //       {
-  //         first_name: "LeBron",
-  //         last_name: "James",
-  //         text: "Prime rib and filet were made spot on. Vegetable sides were made well as was the shrimp and scallops.",
-  //         rating: 4,
-  //         restaurantId: lastTrainToDelhiId,
-  //         user_id: userLebron.id,
-  //       },
-  //       {
-  //         first_name: "LeBron",
-  //         last_name: "James",
-  //         text: "This visit was with a friend who had never been here before. She loved it as much as I do. She said it will be our new go to place!",
-  //         rating: 4,
-  //         restaurantId: curryishTavernId,
-  //         user_id: userLebron.id,
-  //       },
-  //       {
-  //         first_name: "LeBron",
-  //         last_name: "James",
-  //         text: "Had a full 3 course meal in the mid afternoon and every aspect of it was great. Server was named Brittany I believe and she was simply excellent.",
-  //         rating: 5,
-  //         restaurantId: pukkaId,
-  //         user_id: userLebron.id,
-  //       },
-  //       {
-  //         first_name: "LeBron",
-  //         last_name: "James",
-  //         text: "Very nice evening spent with special family.",
-  //         rating: 5,
-  //         restaurantId: mariachisId,
-  //         user_id: userLebron.id,
-  //       },
-  //       {
-  //         first_name: "LeBron",
-  //         last_name: "James",
-  //         text: "First time, and not the last. Very welcoming. The food was deliscious and service very good. Highly recommend.",
-  //         rating: 4,
-  //         restaurantId: eldoradoTacoId,
-  //         user_id: userLebron.id,
-  //       },
-  //       {
-  //         first_name: "Cassidy",
-  //         last_name: "Mancher",
-  //         text: "Enjoyed our drinks, dinner and dessert. Great service and ambience.",
-  //         rating: 5,
-  //         restaurantId: mariachisId,
-  //         user_id: userCassidy.id,
-  //       },
-  //       {
-  //         first_name: "Cassidy",
-  //         last_name: "Mancher",
-  //         text: "The food was absolutely on point, we had such a great experience and our server was top notch. ",
-  //         rating: 4,
-  //         restaurantId: stelvioId,
-  //         user_id: userCassidy.id,
-  //       },
-  //       {
-  //         first_name: "Cassidy",
-  //         last_name: "Mancher",
-  //         text: "The steaks were 'Melt In Your Mouth'!!! Nigel, our waiter was amazing!! Great experience overall!",
-  //         rating: 5,
-  //         restaurantId: coconutLagoonId,
-  //         user_id: userCassidy.id,
-  //       },
-  //       {
-  //         first_name: "Cassidy",
-  //         last_name: "Mancher",
-  //         text: "It was really great! Just temperature wise it was really chilly. A little mixup at the end with desserts also but overall we really enjoyed the evening",
-  //         rating: 4,
-  //         restaurantId: bluRistoranteId,
-  //         user_id: userCassidy.id,
-  //       },
-  //       {
-  //         first_name: "Cassidy",
-  //         last_name: "Mancher",
-  //         text: "Food was served cold. Major No No. Fantastic Dessert. Service was good. Heavy Rock music should be toned down. Price vs Quality… not great.",
-  //         rating: 3,
-  //         restaurantId: laBartolaId,
-  //         user_id: userCassidy.id,
-  //       },
-  //       {
-  //         first_name: "Cassidy",
-  //         last_name: "Mancher",
-  //         text: "Fantastic food and excellent selection. Everything was fresh - and the scones were still warm!",
-  //         rating: 4,
-  //         restaurantId: eldoradoTacoId,
-  //         user_id: userCassidy.id,
-  //       },
-  //       {
-  //         first_name: "Cassidy",
-  //         last_name: "Mancher",
-  //         text: "Fantastic food and excellent selection. Everything was fresh - and the scones were still warm!",
-  //         rating: 4,
-  //         restaurantId: utsavId,
-  //         user_id: userCassidy.id,
-  //       },
-  //     ],
-  //   });
+  await prisma.review.createMany({
+    data: [
+      {
+        firstName: 'Laith',
+        lastName: 'Harb',
+        text: 'This place is amazing, it has some of the best dishes in the world. It is so so so good!!!',
+        rating: 5,
+        restaurantId: vivaanId,
+        userId: userLaith.id,
+      },
+      {
+        firstName: 'Laith',
+        lastName: 'Harb',
+        text: 'This food is so good! It is the fanciest thing I have ever seen in my short life',
+        rating: 5,
+        restaurantId: bluRistoranteId,
+        userId: userLaith.id,
+      },
+      {
+        firstName: 'Laith',
+        lastName: 'Harb',
+        text: 'Excellent food and service. Busy night, but everything was great! Highly recommend.',
+        rating: 5,
+        restaurantId: elCatrinId,
+        userId: userLaith.id,
+      },
+      {
+        firstName: 'Laith',
+        lastName: 'Harb',
+        text: 'Very nice place for a date night, the service was fast and friendly. The food was amazing.',
+        rating: 4,
+        restaurantId: stelvioId,
+        userId: userLaith.id,
+      },
+      {
+        firstName: 'Laith',
+        lastName: 'Harb',
+        text: 'Extremely disappointing in our experience.',
+        rating: 2,
+        restaurantId: laBartolaId,
+        userId: userLaith.id,
+      },
+      {
+        firstName: 'Laith',
+        lastName: 'Harb',
+        text: 'This place is amazing, it has some of the best dishes in the world. It is so so so good!!!',
+        rating: 5,
+        restaurantId: elCatrinId,
+        userId: userLaith.id,
+      },
+      {
+        firstName: 'Laith',
+        lastName: 'Harb',
+        text: 'As always, food was excellent. Waitress was friendly and prompt. We had just one problem in that our dessert order went rogue in the system and we waited ages for it to arrive.',
+        rating: 5,
+        restaurantId: kamasutraIndianId,
+        userId: userLaith.id,
+      },
+      {
+        firstName: 'Laith',
+        lastName: 'Harb',
+        text: 'Restaurant was loud and crowded. Food is not worth the price.',
+        rating: 3,
+        restaurantId: eldoradoTacoId,
+        userId: userLaith.id,
+      },
+      {
+        firstName: 'Josh',
+        lastName: 'Allen',
+        text: 'A Christmas lunch with clients served by a friendly server with a good wine selection everyone enjoyed the appetizers and meals',
+        rating: 4,
+        restaurantId: vivaanId,
+        userId: userJosh.id,
+      },
+      {
+        firstName: 'Josh',
+        lastName: 'Allen',
+        text: 'The food was very tasty, the price is a little high so a place to go only for special occasions',
+        rating: 5,
+        restaurantId: sofiaId,
+        userId: userJosh.id,
+      },
+      {
+        firstName: 'Josh',
+        lastName: 'Allen',
+        text: 'Had a great time at Chops. Our server Dane was super friendly. Dinner was delicious as always.',
+        rating: 3,
+        restaurantId: curryishTavernId,
+        userId: userJosh.id,
+      },
+      {
+        firstName: 'Josh',
+        lastName: 'Allen',
+        text: 'The service was poor as we had to wait a long time for our food. There were some issues but were dealt with in a proper manner.',
+        rating: 3,
+        restaurantId: adrakYorkvilleId,
+        userId: userJosh.id,
+      },
+      {
+        firstName: 'Josh',
+        lastName: 'Allen',
+        text: 'Wonderful food and service.',
+        rating: 5,
+        restaurantId: coconutLagoonId,
+        userId: userJosh.id,
+      },
+      {
+        firstName: 'Josh',
+        lastName: 'Allen',
+        text: 'Great food, great staff. You can’t ask for much more from a restaurant.',
+        rating: 5,
+        restaurantId: bluRistoranteId,
+        userId: userJosh.id,
+      },
+      {
+        firstName: 'LeBron',
+        lastName: 'James',
+        text: 'Wonderful service! Delicious food! Comfortable seating and luxurious atmosphere.',
+        rating: 5,
+        restaurantId: RamaKrishnaId,
+        userId: userLebron.id,
+      },
+      {
+        firstName: 'LeBron',
+        lastName: 'James',
+        text: 'Prime rib and filet were made spot on. Vegetable sides were made well as was the shrimp and scallops.',
+        rating: 4,
+        restaurantId: lastTrainToDelhiId,
+        userId: userLebron.id,
+      },
+      {
+        firstName: 'LeBron',
+        lastName: 'James',
+        text: 'This visit was with a friend who had never been here before. She loved it as much as I do. She said it will be our new go to place!',
+        rating: 4,
+        restaurantId: curryishTavernId,
+        userId: userLebron.id,
+      },
+      {
+        firstName: 'LeBron',
+        lastName: 'James',
+        text: 'Had a full 3 course meal in the mid afternoon and every aspect of it was great. Server was named Brittany I believe and she was simply excellent.',
+        rating: 5,
+        restaurantId: pukkaId,
+        userId: userLebron.id,
+      },
+      {
+        firstName: 'LeBron',
+        lastName: 'James',
+        text: 'Very nice evening spent with special family.',
+        rating: 5,
+        restaurantId: mariachisId,
+        userId: userLebron.id,
+      },
+      {
+        firstName: 'LeBron',
+        lastName: 'James',
+        text: 'First time, and not the last. Very welcoming. The food was deliscious and service very good. Highly recommend.',
+        rating: 4,
+        restaurantId: eldoradoTacoId,
+        userId: userLebron.id,
+      },
+      {
+        firstName: 'Cassidy',
+        lastName: 'Mancher',
+        text: 'Enjoyed our drinks, dinner and dessert. Great service and ambience.',
+        rating: 5,
+        restaurantId: mariachisId,
+        userId: userCassidy.id,
+      },
+      {
+        firstName: 'Cassidy',
+        lastName: 'Mancher',
+        text: 'The food was absolutely on point, we had such a great experience and our server was top notch. ',
+        rating: 4,
+        restaurantId: stelvioId,
+        userId: userCassidy.id,
+      },
+      {
+        firstName: 'Cassidy',
+        lastName: 'Mancher',
+        text: "The steaks were 'Melt In Your Mouth'!!! Nigel, our waiter was amazing!! Great experience overall!",
+        rating: 5,
+        restaurantId: coconutLagoonId,
+        userId: userCassidy.id,
+      },
+      {
+        firstName: 'Cassidy',
+        lastName: 'Mancher',
+        text: 'It was really great! Just temperature wise it was really chilly. A little mixup at the end with desserts also but overall we really enjoyed the evening',
+        rating: 4,
+        restaurantId: bluRistoranteId,
+        userId: userCassidy.id,
+      },
+      {
+        firstName: 'Cassidy',
+        lastName: 'Mancher',
+        text: 'Food was served cold. Major No No. Fantastic Dessert. Service was good. Heavy Rock music should be toned down. Price vs Quality… not great.',
+        rating: 3,
+        restaurantId: laBartolaId,
+        userId: userCassidy.id,
+      },
+      {
+        firstName: 'Cassidy',
+        lastName: 'Mancher',
+        text: 'Fantastic food and excellent selection. Everything was fresh - and the scones were still warm!',
+        rating: 4,
+        restaurantId: eldoradoTacoId,
+        userId: userCassidy.id,
+      },
+      {
+        firstName: 'Cassidy',
+        lastName: 'Mancher',
+        text: 'Fantastic food and excellent selection. Everything was fresh - and the scones were still warm!',
+        rating: 4,
+        restaurantId: utsavId,
+        userId: userCassidy.id,
+      },
+    ],
+  });
 
   //   await prisma.table.createMany({
   //     data: [
