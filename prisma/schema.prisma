@@ -21,7 +21,7 @@ model Restaurant {
   slug        String   @unique
   price       PRICE
   items       Item[]
-  Review      Review[]
+  reviews     Review[]
 
   locationId Int
   location   Location @relation(fields: [locationId], references: [id])
@@ -71,7 +71,7 @@ model User {
   email     String
   phone     String
 
-  Review Review[]
+  reviews Review[]
 }
 
 model Review {

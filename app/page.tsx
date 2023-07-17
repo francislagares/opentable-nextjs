@@ -10,11 +10,12 @@ const fetchRestaurants = async (): Promise<Restaurant[]> => {
     select: {
       id: true,
       name: true,
-      slug: true,
       mainImage: true,
       cuisine: true,
+      slug: true,
       location: true,
       price: true,
+      reviews: true,
     },
   });
 
