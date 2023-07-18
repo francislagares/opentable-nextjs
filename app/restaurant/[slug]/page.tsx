@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { notFound } from 'next/navigation';
 
 import { RestaurantDetail } from '@/models/restaurant';
 import { Params } from '@/types/params';
@@ -39,7 +40,7 @@ const fetchRestaurantBySlug = async (
   });
 
   if (!restaurant) {
-    throw new Error('Cannot find a restaurant');
+    notFound();
   }
 
   return restaurant;

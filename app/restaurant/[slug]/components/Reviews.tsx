@@ -1,4 +1,5 @@
 import { Review } from '@prisma/client';
+
 import ReviewCard from './ReviewCard';
 
 const Reviews = ({ reviews }: { reviews: Review[] }) => {

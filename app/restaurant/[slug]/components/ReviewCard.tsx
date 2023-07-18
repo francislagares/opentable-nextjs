@@ -1,5 +1,6 @@
-import Stars from '@/components/Stars';
 import { Review } from '@prisma/client';
+
+import Stars from '@/components/Stars';
 
 const ReviewCard = ({ review }: { review: Review }) => {
   return (

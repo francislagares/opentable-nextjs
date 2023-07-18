@@ -1,5 +1,7 @@
-import { Restaurant } from '@/models/restaurant';
 import Link from 'next/link';
+
+import { Restaurant } from '@/models/restaurant';
+
 import Price from './Price';
 import Stars from './Stars';
 

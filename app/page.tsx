@@ -1,7 +1,8 @@
+import { PrismaClient } from '@prisma/client';
+
 import Header from '@/components/Header';
 import RestaurantCard from '@/components/RestaurantCard';
 import { Restaurant } from '@/models/restaurant';
-import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 

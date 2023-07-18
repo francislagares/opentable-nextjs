@@ -1,5 +1,7 @@
-import { Params } from '@/types/params';
 import { PrismaClient } from '@prisma/client';
+
+import { Params } from '@/types/params';
+
 import Menu from '../components/Menu';
 import RestaurantNavBar from '../components/RestaurantNavBar';
 

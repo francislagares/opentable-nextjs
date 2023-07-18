@@ -1,4 +1,5 @@
 import { Item } from '@prisma/client';
+
 import { MenuCard } from './MenuCard';
 
 const Menu = ({ menu }: { menu: Item[] }) => {
