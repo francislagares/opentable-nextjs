@@ -21,7 +21,6 @@
   ],
   "plugins": [
     "testing-library",
-    "jest-dom",
     "jsx-a11y",
     "simple-import-sort",
     "prettier",
