@@ -1,6 +1,8 @@
+import { PrismaClient } from '@prisma/client';
+
 import { RestaurantDetail } from '@/models/restaurant';
 import { Params } from '@/types/params';
-import { PrismaClient } from '@prisma/client';
+
 import Description from './components/Description';
 import Images from './components/Images';
 import Rating from './components/Rating';
@@ -37,7 +39,7 @@ const fetchRestaurantBySlug = async (
   });
 
   if (!restaurant) {
-    throw new Error();
+    throw new Error('Cannot find a restaurant');
   }
 
   return restaurant;

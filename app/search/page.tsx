@@ -1,6 +1,8 @@
+import { PrismaClient } from '@prisma/client';
+
 import Header from '@/components/Header';
 import { SearchParams } from '@/types/searchParams';
-import { PrismaClient } from '@prisma/client';
+
 import RestaurantCard from './components/RestaurantCard';
 import SearchSideBar from './components/SearchSideBar';
 

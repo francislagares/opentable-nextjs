@@ -1,9 +1,10 @@
-import { calculateReviewRatingAverage } from '@/utils/calculateReviewRatingAverage';
 import { Review } from '@prisma/client';
 import Image from 'next/image';
 import emptyStar from 'public/icons/empty-star.png';
 import fullStar from 'public/icons/full-star.png';
 import halfStar from 'public/icons/half-star.png';
+
+import { calculateReviewRatingAverage } from '@/utils/calculateReviewRatingAverage';
 
 const Stars = ({ reviews, rating }: { reviews: Review[]; rating?: number }) => {
   const reviewRating = rating || calculateReviewRatingAverage(reviews);
@@ -21,8 +22,8 @@ const Stars = ({ reviews, rating }: { reviews: Review[]; rating?: number }) => {
       } else stars.push(emptyStar);
     }
 
-    return stars.map(star => {
-      return <Image src={star} alt='' className='w-4 h-4 mr-1' />;
+    return stars.map((star, index) => {
+      return <Image key={index} src={star} alt='' className='w-4 h-4 mr-1' />;
     });
   };
 

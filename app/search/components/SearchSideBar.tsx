@@ -1,7 +1,7 @@
 import { Cuisine, Location, PRICE } from '@prisma/client';
+import Link from 'next/link';
 
 import { SearchParams } from '@/types/searchParams';
-import Link from 'next/link';
 
 interface Props {
   locations: Location[];
