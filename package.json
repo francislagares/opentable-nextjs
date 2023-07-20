@@ -12,6 +12,9 @@
     "stylelint": "stylelint **/*.{css,scss,tsx,js} --fix"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.1",
     "@prisma/client": "5.0.0",
     "next": "13.4.10",
     "prisma": "^5.0.0",
@@ -20,8 +23,8 @@
     "tailwindcss": "3.3.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.6",
-    "@commitlint/config-conventional": "^17.6.6",
+    "@commitlint/cli": "^17.6.7",
+    "@commitlint/config-conventional": "^17.6.7",
     "@types/node": "20.4.2",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
@@ -53,9 +56,9 @@
     "postcss": "8.4.26",
     "prettier": "^3.0.0",
     "prettier-stylelint": "^0.4.2",
-    "sass": "^1.63.6",
+    "sass": "^1.64.0",
     "start-server-and-test": "^2.0.0",
-    "stylelint": "^15.10.1",
+    "stylelint": "^15.10.2",
     "stylelint-a11y": "^1.2.3",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-order": "^6.0.3",
