@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
+import * as jose from 'jose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import validator from 'validator';
 
@@ -44,6 +45,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     ];
 
+    validationSchema.forEach(check => {
+      if (!check.valid) {
+        errors.push(check.errorMessage);
+      }
+    });
+
+    if (errors.length) {
+      return res.status(400).json({ errorMessage: errors[0] });
+    }
+
     const userWithEmail = await prisma.user.findUnique({
       where: {
         email,
@@ -58,16 +69,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    validationSchema.forEach(check => {
-      if (!check.valid) {
-        errors.push(check.errorMessage);
-      }
-    });
-
-    if (errors.length) {
-      return res.status(400).json({ errorMessage: errors[0] });
-    }
-
     const user = await prisma.user.create({
       data: {
         firstName,
@@ -79,8 +80,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
+    const alg = 'HS256';
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+    const token = await new jose.SignJWT({ email: user.email })
+      .setProtectedHeader({ alg })
+      .setExpirationTime('24h')
+      .sign(secret);
+
     res.status(200).json({
-      user,
+      token,
     });
   }
 };
