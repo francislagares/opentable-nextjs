@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Restaurant } from '@/models/restaurant';
+import { Restaurant } from '@/app/models/restaurant';
 
 import Price from './Price';
 import Stars from './Stars';

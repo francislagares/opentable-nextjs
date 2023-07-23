@@ -4,7 +4,7 @@ import emptyStar from 'public/icons/empty-star.png';
 import fullStar from 'public/icons/full-star.png';
 import halfStar from 'public/icons/half-star.png';
 
-import { calculateReviewRatingAverage } from '@/utils/calculateReviewRatingAverage';
+import { calculateReviewRatingAverage } from '@/app/utils/calculateReviewRatingAverage';
 
 const Stars = ({ reviews, rating }: { reviews: Review[]; rating?: number }) => {
   const reviewRating = rating || calculateReviewRatingAverage(reviews);

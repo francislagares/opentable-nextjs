@@ -1,8 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import { notFound } from 'next/navigation';
 
-import { RestaurantDetail } from '@/models/restaurant';
-import { Params } from '@/types/params';
+import { RestaurantDetail } from '@/app/models/restaurant';
+import { Params } from '@/app/types/params';
 
 import Description from './components/Description';
 import Images from './components/Images';

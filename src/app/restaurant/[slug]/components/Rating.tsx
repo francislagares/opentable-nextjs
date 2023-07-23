@@ -1,7 +1,6 @@
+import Stars from '@/app/components/Stars';
+import { calculateReviewRatingAverage } from '@/app/utils/calculateReviewRatingAverage';
 import { Review } from '@prisma/client';
-
-import Stars from '@/components/Stars';
-import { calculateReviewRatingAverage } from '@/utils/calculateReviewRatingAverage';
 
 const Rating = ({ reviews }: { reviews: Review[] }) => {
   return (

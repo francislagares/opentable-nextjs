@@ -1,9 +1,9 @@
 import { PRICE, PrismaClient } from '@prisma/client';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const prisma = new PrismaClient();
 
-export async function GET(req: NextRequest, res: NextResponse) {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // await prisma.table.deleteMany();
   await prisma.review.deleteMany();
   await prisma.item.deleteMany();
@@ -1314,5 +1314,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
   //     ],
   //   });
 
-  return new NextResponse('Seeding Database!');
-}
+  res.status(200).json({ success: 'Seeding completed!' });
+};
+
+export default handler;

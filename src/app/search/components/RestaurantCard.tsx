@@ -1,9 +1,8 @@
+import Price from '@/app/components/Price';
+import Stars from '@/app/components/Stars';
+import { Restaurant } from '@/app/models/restaurant';
+import { calculateReviewRatingAverage } from '@/app/utils/calculateReviewRatingAverage';
 import Link from 'next/link';
-
-import Price from '@/components/Price';
-import Stars from '@/components/Stars';
-import { Restaurant } from '@/models/restaurant';
-import { calculateReviewRatingAverage } from '@/utils/calculateReviewRatingAverage';
 
 interface RestaurantCard {
   restaurant: Restaurant;
