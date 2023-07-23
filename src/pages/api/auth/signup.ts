@@ -1,7 +1,10 @@
+import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import validator from 'validator';
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
+const prisma = new PrismaClient();
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const { firstName, lastName, email, phone, city, password } = req.body;
     const errors: string[] = [];
@@ -39,6 +42,18 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
         errorMessage: 'Password is not strong enough.',
       },
     ];
+
+    const userWithEmail = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    if (userWithEmail) {
+      return res
+        .status(400)
+        .json({ errorMessage: 'Email is associated with another account.' });
+    }
 
     validationSchema.forEach(check => {
       if (!check.valid) {
