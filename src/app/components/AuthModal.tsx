@@ -3,6 +3,8 @@
 import { Box, Modal } from '@mui/material';
 import { useEffect, useState } from 'react';
 
+import useAuth from '@/hooks/useAuth';
+
 import AuthModalForm from './AuthModalForm';
 
 const style = {
@@ -19,6 +21,7 @@ const style = {
 const AuthModal = ({ isSignin }: { isSignin: boolean }) => {
   const [open, setOpen] = useState(false);
   const [disabled, setDisabled] = useState(true);
+  const { signin } = useAuth();
   const [inputs, setInputs] = useState({
     firstName: '',
     lastName: '',
@@ -35,6 +38,12 @@ const AuthModal = ({ isSignin }: { isSignin: boolean }) => {
       ...inputs,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleClick = () => {
+    if (isSignin) {
+      signin({ email: inputs.email, password: inputs.password });
+    }
   };
 
   const renderContent = (signinContent: string, signupContent: string) => {
@@ -100,6 +109,7 @@ const AuthModal = ({ isSignin }: { isSignin: boolean }) => {
               <button
                 className='uppercase bg-red-600 w-full text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400'
                 disabled={disabled}
+                onClick={handleClick}
               >
                 {renderContent('Sign In', 'Create Account')}
               </button>
