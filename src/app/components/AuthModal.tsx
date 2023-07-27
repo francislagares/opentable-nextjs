@@ -22,7 +22,7 @@ const style = {
 const AuthModal = ({ isSignin }: { isSignin: boolean }) => {
   const [open, setOpen] = useState(false);
   const [disabled, setDisabled] = useState(true);
-  const { signin } = useAuth();
+  const { signin, signup } = useAuth();
   const { data, error, loading } = useAuthContext();
   const [inputs, setInputs] = useState({
     firstName: '',
@@ -46,6 +46,8 @@ const AuthModal = ({ isSignin }: { isSignin: boolean }) => {
     if (isSignin) {
       signin({ email: inputs.email, password: inputs.password }, handleOpen);
     }
+
+    signup(inputs, handleOpen);
   };
 
   const renderContent = (signinContent: string, signupContent: string) => {

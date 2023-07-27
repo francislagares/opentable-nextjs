@@ -7,6 +7,13 @@ interface SignIn {
   password: string;
 }
 
+interface SignUp extends SignIn {
+  firstName: string;
+  lastName: string;
+  city: string;
+  phone: string;
+}
+
 const useAuth = () => {
   const { data, error, loading, setAuthState } = useAuthContext();
 
@@ -41,7 +48,42 @@ const useAuth = () => {
       });
     }
   };
-  const signup = async () => {};
+
+  const signup = async (
+    { email, password, firstName, lastName, city, phone }: SignUp,
+    handleClose: () => void,
+  ) => {
+    setAuthState({
+      data: null,
+      error: null,
+      loading: true,
+    });
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/api/auth/signup',
+        {
+          email,
+          password,
+          firstName,
+          lastName,
+          city,
+          phone,
+        },
+      );
+      setAuthState({
+        data: response.data,
+        error: null,
+        loading: false,
+      });
+      handleClose();
+    } catch (error: any) {
+      setAuthState({
+        data: null,
+        error: error.response.data.errorMessage,
+        loading: false,
+      });
+    }
+  };
 
   return {
     signin,
