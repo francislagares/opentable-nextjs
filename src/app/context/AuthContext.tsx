@@ -1,6 +1,8 @@
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import axios from 'axios';
+import { getCookie } from 'cookies-next';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 import { User } from '@/app/models/user';
 
@@ -15,7 +17,7 @@ interface AuthState extends Auth {
 }
 
 const AuthContext = createContext<AuthState>({
-  loading: false,
+  loading: true,
   error: null,
   data: null,
   setAuthState: () => {},
@@ -27,10 +29,53 @@ interface Props {
 
 export const AuthProvider = ({ children }: Props) => {
   const [authState, setAuthState] = useState<Auth>({
-    loading: false,
-    error: null,
+    loading: true,
     data: null,
+    error: null,
   });
+
+  const fetchUser = async () => {
+    setAuthState({
+      data: null,
+      error: null,
+      loading: true,
+    });
+    try {
+      const jwt = getCookie('jwt');
+
+      if (!jwt) {
+        return setAuthState({
+          data: null,
+          error: null,
+          loading: false,
+        });
+      }
+
+      const response = await axios.get('http://localhost:3000/api/auth/me', {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+
+      axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
+
+      setAuthState({
+        data: response.data,
+        error: null,
+        loading: false,
+      });
+    } catch (error: any) {
+      setAuthState({
+        data: null,
+        error: error.response.data.errorMessage,
+        loading: false,
+      });
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <AuthContext.Provider value={{ ...authState, setAuthState }}>

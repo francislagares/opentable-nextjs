@@ -15,7 +15,7 @@ interface SignUp extends SignIn {
 }
 
 const useAuth = () => {
-  const { data, error, loading, setAuthState } = useAuthContext();
+  const { setAuthState } = useAuthContext();
 
   const signin = async (
     { email, password }: SignIn,
