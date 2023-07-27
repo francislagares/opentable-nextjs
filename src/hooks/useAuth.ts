@@ -10,7 +10,10 @@ interface SignIn {
 const useAuth = () => {
   const { data, error, loading, setAuthState } = useAuthContext();
 
-  const signin = async ({ email, password }: SignIn) => {
+  const signin = async (
+    { email, password }: SignIn,
+    handleOpen: () => void,
+  ) => {
     setAuthState({
       data: null,
       error: null,
@@ -29,6 +32,7 @@ const useAuth = () => {
         error: null,
         loading: false,
       });
+      handleOpen();
     } catch (error: any) {
       setAuthState({
         data: null,
