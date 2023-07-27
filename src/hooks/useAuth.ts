@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { deleteCookie } from 'cookies-next';
 
 import { useAuthContext } from '@/app/context/AuthContext';
 
@@ -85,9 +86,20 @@ const useAuth = () => {
     }
   };
 
+  const signout = () => {
+    deleteCookie('jwt');
+
+    setAuthState({
+      data: null,
+      error: null,
+      loading: false,
+    });
+  };
+
   return {
     signin,
     signup,
+    signout,
   };
 };
 

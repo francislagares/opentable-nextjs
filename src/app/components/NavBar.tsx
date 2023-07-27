@@ -2,11 +2,14 @@
 
 import Link from 'next/link';
 
+import useAuth from '@/hooks/useAuth';
+
 import { useAuthContext } from '../context/AuthContext';
 import AuthModal from './AuthModal';
 
 const NavBar = () => {
   const { data, loading } = useAuthContext();
+  const { signout } = useAuth();
 
   return (
     <nav className='bg-white p-2 flex justify-between'>
@@ -17,7 +20,10 @@ const NavBar = () => {
         {loading ? null : (
           <div className='flex'>
             {data ? (
-              <button className='bg-blue-400 text-white border p-1 px-4 rounded mr-3'>
+              <button
+                className='bg-blue-400 text-white border p-1 px-4 rounded mr-3'
+                onClick={signout}
+              >
                 Logout
               </button>
             ) : (
