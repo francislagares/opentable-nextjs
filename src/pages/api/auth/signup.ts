@@ -93,7 +93,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  return res.status(400).json({ message: 'Unknown endpoint' });
+  return res.status(400).json({ errorMessage: 'Unknown endpoint' });
 };
 
 export default handler;
