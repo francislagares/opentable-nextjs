@@ -18,4 +18,6 @@ export interface RestaurantDetail {
   description: string;
   slug: string;
   reviews: Review[];
+  openTime: string;
+  closeTime: string;
 }

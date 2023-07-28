@@ -36,6 +36,8 @@ const fetchRestaurantBySlug = async (
       description: true,
       slug: true,
       reviews: true,
+      openTime: true,
+      closeTime: true,
     },
   });
 
@@ -62,7 +64,10 @@ const RestaurantDetails = async ({ params }: Params) => {
         <Reviews reviews={restaurant.reviews} />
       </div>
       <div className='w-[27%] relative text-reg'>
-        <ReservationCard />
+        <ReservationCard
+          openTime={restaurant.openTime}
+          closeTime={restaurant.closeTime}
+        />
       </div>
     </>
   );
