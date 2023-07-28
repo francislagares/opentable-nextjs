@@ -1,4 +1,5 @@
 import '@/app/styles/globals.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import NavBar from '@/app/components/NavBar';
 
