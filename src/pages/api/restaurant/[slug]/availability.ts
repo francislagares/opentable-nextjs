@@ -1,5 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { schedules } from '@/data';
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { slug, day, time, partySize } = req.query;
 
@@ -9,11 +11,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
+  const searchTimes = schedules.find(schedule => schedule.time === time)
+    ?.searchTimes;
+
+  if (!searchTimes) {
+    return res.status(400).json({
+      errorMessage: 'Invalid data provided.',
+    });
+  }
+
   return res.json({
-    slug,
-    day,
-    time,
-    partySize,
+    searchTimes,
   });
 };
 
