@@ -11,17 +11,19 @@ datasource db {
 }
 
 model Restaurant {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   mainImage   String
   images      String[]
   description String
   openTime    String
   closeTime   String
-  slug        String   @unique
+  slug        String    @unique
   price       PRICE
   items       Item[]
   reviews     Review[]
+  bookings    Booking[]
+  tables      Table[]
 
   locationId Int
   location   Location @relation(fields: [locationId], references: [id])
@@ -88,6 +90,48 @@ model Review {
 
   userId Int
   user   User @relation(fields: [userId], references: [id])
+}
+
+model Booking {
+  id              Int      @id @default(autoincrement())
+  numberOfPeople  Int
+  bookingTime     DateTime
+  bookerEmail     String
+  bookerPhone     String
+  bookerFirstName String
+  bookerLastName  String
+  bookerOccasion  String
+  bookerRequest   String
+
+  tables       BookingsOnTables[]
+  restaurantId Int
+  restaurant   Restaurant         @relation(fields: [restaurantId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Table {
+  id           Int                @id @default(autoincrement())
+  seats        Int
+  restaurantId Int
+  Restaurant   Restaurant         @relation(fields: [restaurantId], references: [id])
+  bookings     BookingsOnTables[]
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+}
+
+model BookingsOnTables {
+  bookingId Int
+  bookings  Booking @relation(fields: [bookingId], references: [id])
+
+  tableId Int
+  table   Table @relation(fields: [tableId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([bookingId, tableId])
 }
 
 enum PRICE {
