@@ -76,6 +76,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     };
   });
 
+  searchTimesWithTables.forEach(time => {
+    time.tables = time.tables.filter(table => {
+      if (bookingTablesObj[time.date.toISOString()]) {
+        if (bookingTablesObj[time.date.toISOString()][table.id]) return false;
+      }
+      return true;
+    });
+  });
+
   return res.json({
     searchTimes,
     bookings,
