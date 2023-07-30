@@ -51,10 +51,28 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
   });
 
+  const restaurant = await prisma.restaurant.findUnique({
+    where: {
+      slug,
+    },
+    select: {
+      tables: true,
+    },
+  });
+
+  if (!restaurant) {
+    return res.status(400).json({
+      errorMessage: 'Invalid data provided.',
+    });
+  }
+
+  const tables = restaurant.tables;
+
   return res.json({
     searchTimes,
     bookings,
     bookingTablesObj,
+    tables,
   });
 };
 
