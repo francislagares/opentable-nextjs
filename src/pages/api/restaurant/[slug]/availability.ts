@@ -68,11 +68,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const tables = restaurant.tables;
 
+  const searchTimesWithTables = searchTimes.map(searchTime => {
+    return {
+      date: new Date(`${day}T${searchTime}`),
+      time: searchTime,
+      tables,
+    };
+  });
+
   return res.json({
     searchTimes,
     bookings,
     bookingTablesObj,
     tables,
+    searchTimesWithTables,
   });
 };
 
