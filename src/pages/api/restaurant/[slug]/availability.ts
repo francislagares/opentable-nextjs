@@ -57,6 +57,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     },
     select: {
       tables: true,
+      openTime: true,
+      closeTime: true,
     },
   });
 
@@ -85,16 +87,28 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   });
 
-  const availabilities = searchTimesWithTables.map(schedule => {
-    const sumSeats = schedule.tables.reduce((sum, table) => {
-      return sum + table.seats;
-    }, 0);
+  const availabilities = searchTimesWithTables
+    .map(schedule => {
+      const sumSeats = schedule.tables.reduce((sum, table) => {
+        return sum + table.seats;
+      }, 0);
 
-    return {
-      time: schedule.time,
-      available: sumSeats >= parseInt(partySize),
-    };
-  });
+      return {
+        time: schedule.time,
+        available: sumSeats >= parseInt(partySize),
+      };
+    })
+    .filter(availability => {
+      const timeIsAfterOpeningHour =
+        new Date(`${day}T${availability.time}`) >=
+        new Date(`${day}T${restaurant.openTime}`);
+
+      const timeIsBeforeClosingHour =
+        new Date(`${day}T${availability.time}`) <=
+        new Date(`${day}T${restaurant.closeTime}`);
+
+      return timeIsAfterOpeningHour && timeIsBeforeClosingHour;
+    });
 
   return res.json({
     searchTimes,
