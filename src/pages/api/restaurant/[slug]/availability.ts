@@ -85,12 +85,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   });
 
+  const availabilities = searchTimesWithTables.map(schedule => {
+    const sumSeats = schedule.tables.reduce((sum, table) => {
+      return sum + table.seats;
+    }, 0);
+
+    return {
+      time: schedule.time,
+      available: sumSeats >= parseInt(partySize),
+    };
+  });
+
   return res.json({
     searchTimes,
     bookings,
     bookingTablesObj,
     tables,
     searchTimesWithTables,
+    availabilities,
   });
 };
 
