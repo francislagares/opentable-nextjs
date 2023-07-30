@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 const prisma = new PrismaClient();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  // await prisma.table.deleteMany();
+  await prisma.table.deleteMany();
   await prisma.review.deleteMany();
   await prisma.item.deleteMany();
   await prisma.restaurant.deleteMany();
@@ -1297,22 +1297,22 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     ],
   });
 
-  //   await prisma.table.createMany({
-  //     data: [
-  //       {
-  //         restaurantId: vivaanId,
-  //         seats: 4,
-  //       },
-  //       {
-  //         restaurantId: vivaanId,
-  //         seats: 4,
-  //       },
-  //       {
-  //         restaurantId: vivaanId,
-  //         seats: 2,
-  //       },
-  //     ],
-  //   });
+  await prisma.table.createMany({
+    data: [
+      {
+        restaurantId: vivaanId,
+        seats: 4,
+      },
+      {
+        restaurantId: vivaanId,
+        seats: 4,
+      },
+      {
+        restaurantId: vivaanId,
+        seats: 2,
+      },
+    ],
+  });
 
   res.status(200).json({ success: 'Seeding completed!' });
 };

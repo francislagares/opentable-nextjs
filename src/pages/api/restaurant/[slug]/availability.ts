@@ -1,6 +1,9 @@
+import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { schedules } from '@/data';
+
+const prisma = new PrismaClient();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { slug, day, time, partySize } = req.query;
@@ -20,8 +23,38 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
+  const bookings = await prisma.booking.findMany({
+    where: {
+      bookingTime: {
+        gte: new Date(`${day}T${searchTimes[0]}`),
+        lte: new Date(`${day}T${searchTimes[searchTimes.length - 1]}`),
+      },
+    },
+    select: {
+      numberOfPeople: true,
+      bookingTime: true,
+      tables: true,
+    },
+  });
+
+  const bookingTablesObj: { [key: string]: { [key: number]: true } } = {};
+
+  bookings.forEach(booking => {
+    bookingTablesObj[booking.bookingTime.toISOString()] = booking.tables.reduce(
+      (obj, table) => {
+        return {
+          ...obj,
+          [table.tableId]: true,
+        };
+      },
+      {},
+    );
+  });
+
   return res.json({
     searchTimes,
+    bookings,
+    bookingTablesObj,
   });
 };
 
