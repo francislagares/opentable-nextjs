@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { schedules } from '@/data';
+import { findAvailableTables } from '@/services/findAvailableTables';
 
 const prisma = new PrismaClient();
 
@@ -18,43 +18,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       errorMessage: 'Invalid data provided.',
     });
   }
-
-  const searchTimes = schedules.find(schedule => schedule.time === time)
-    ?.searchTimes;
-
-  if (!searchTimes) {
-    return res.status(400).json({
-      errorMessage: 'Invalid data provided.',
-    });
-  }
-
-  const bookings = await prisma.booking.findMany({
-    where: {
-      bookingTime: {
-        gte: new Date(`${day}T${searchTimes[0]}`),
-        lte: new Date(`${day}T${searchTimes[searchTimes.length - 1]}`),
-      },
-    },
-    select: {
-      numberOfPeople: true,
-      bookingTime: true,
-      tables: true,
-    },
-  });
-
-  const bookingTablesObj: { [key: string]: { [key: number]: true } } = {};
-
-  bookings.forEach(booking => {
-    bookingTablesObj[booking.bookingTime.toISOString()] = booking.tables.reduce(
-      (obj, table) => {
-        return {
-          ...obj,
-          [table.tableId]: true,
-        };
-      },
-      {},
-    );
-  });
 
   const restaurant = await prisma.restaurant.findUnique({
     where: {
@@ -73,24 +36,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const tables = restaurant.tables;
-
-  const searchTimesWithTables = searchTimes.map(searchTime => {
-    return {
-      date: new Date(`${day}T${searchTime}`),
-      time: searchTime,
-      tables,
-    };
+  const searchTimesWithTables = await findAvailableTables({
+    day,
+    time,
+    res,
+    restaurant,
   });
 
-  searchTimesWithTables.forEach(time => {
-    time.tables = time.tables.filter(table => {
-      if (bookingTablesObj[time.date.toISOString()]) {
-        if (bookingTablesObj[time.date.toISOString()][table.id]) return false;
-      }
-      return true;
+  if (!searchTimesWithTables) {
+    return res.json({
+      errorMessage: 'Invalid data provided.',
     });
-  });
+  }
 
   const availabilities = searchTimesWithTables
     .map(schedule => {
