@@ -14,13 +14,6 @@ const useAvailabilities = () => {
   const [data, setData] = useState(null);
 
   const fetchAvailabilities = async ({ slug, partySize, day, time }: Query) => {
-    console.log({
-      slug,
-      partySize,
-      day,
-      time,
-    });
-    return;
     setLoading(true);
 
     try {
