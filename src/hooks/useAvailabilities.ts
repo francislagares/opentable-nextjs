@@ -8,10 +8,15 @@ interface Query {
   partySize: string;
 }
 
+interface Data {
+  time: string;
+  available: boolean;
+}
+
 const useAvailabilities = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<Data[] | null>(null);
 
   const fetchAvailabilities = async ({ slug, partySize, day, time }: Query) => {
     setLoading(true);

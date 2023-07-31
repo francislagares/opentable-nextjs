@@ -6,7 +6,12 @@ import { schedules } from '@/data';
 const prisma = new PrismaClient();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { slug, day, time, partySize } = req.query;
+  const { slug, day, time, partySize } = req.query as {
+    slug: string;
+    day: string;
+    time: string;
+    partySize: string;
+  };
 
   if (!day || !time || !partySize) {
     return res.status(400).json({
@@ -110,14 +115,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return timeIsAfterOpeningHour && timeIsBeforeClosingHour;
     });
 
-  return res.json({
-    searchTimes,
-    bookings,
-    bookingTablesObj,
-    tables,
-    searchTimesWithTables,
-    availabilities,
-  });
+  return res.json(availabilities);
 };
 
 export default handler;
