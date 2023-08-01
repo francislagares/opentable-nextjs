@@ -1,7 +1,7 @@
 import { Cuisine, Location, PRICE } from '@prisma/client';
+import Link from 'next/link';
 
 import { SearchParams } from '@/app/types/searchParams';
-import Link from 'next/link';
 
 interface Props {
   locations: Location[];
@@ -69,8 +69,9 @@ const SearchSideBar = ({ locations, cuisines, searchParams }: Props) => {
       <div className='mt-3 pb-4'>
         <h1 className='mb-2'>Price</h1>
         <div className='flex'>
-          {prices.map(({ price, label, className }) => (
+          {prices.map(({ price, label, className }, index) => (
             <Link
+              key={index}
               href={{
                 pathname: '/search',
                 query: {
