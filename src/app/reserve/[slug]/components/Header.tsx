@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import Image from 'next/image';
 
 import { convertToDisplayTime, Time } from '@/app/utils/convertToDisplayTime';
 
@@ -14,14 +15,21 @@ const Header = ({ image, name, date, partySize }: Props) => {
 
   return (
     <div>
-      <h3 className='font-bold'>You&aposre almost done!</h3>
+      <h3 className='font-bold'>You're almost done!</h3>
       <div className='mt-5 flex'>
-        <img src={image} alt='' className='w-32 h-18 rounded' />
+        <Image
+          src={image}
+          alt={image}
+          width={100}
+          height={100}
+          className='w-32 h-18 rounded'
+        />
         <div className='ml-4'>
           <h1 className='text-3xl font-bold'>{name}</h1>
           <div className='flex mt-3'>
             <p className='mr-6'>{format(new Date(date), 'ccc, LLL d')}</p>
             <p className='mr-6'>{convertToDisplayTime(time as Time)}</p>
+
             <p className='mr-6'>
               {partySize} {parseInt(partySize) === 1 ? 'person' : 'people'}
             </p>

@@ -1,7 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import { notFound } from 'next/navigation';
 
-import { Params } from '../types/params';
+import { Params } from '@/app/types/params';
+
 import Form from './components/Form';
 import Header from './components/Header';
 
@@ -25,7 +26,6 @@ const fetchRestaurantBySlug = async (slug: string) => {
   if (!restaurant) {
     notFound();
   }
-
   return restaurant;
 };
 
@@ -37,7 +37,7 @@ const Reserve = async ({
   searchParams: { date: string; partySize: string };
 }) => {
   const { slug } = params;
-  console.log(slug);
+  console.log(searchParams);
 
   const restaurant = await fetchRestaurantBySlug(slug);
 
@@ -45,7 +45,7 @@ const Reserve = async ({
     <div className='border-t h-screen'>
       <div className='py-9 w-3/5 m-auto'>
         <Header
-          image={restaurant.name}
+          image={restaurant.mainImage}
           name={restaurant.name}
           date={searchParams.date}
           partySize={searchParams.partySize}
