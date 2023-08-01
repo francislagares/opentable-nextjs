@@ -29,7 +29,6 @@ const Header = ({ image, name, date, partySize }: Props) => {
           <div className='flex mt-3'>
             <p className='mr-6'>{format(new Date(date), 'ccc, LLL d')}</p>
             <p className='mr-6'>{convertToDisplayTime(time as Time)}</p>
-
             <p className='mr-6'>
               {partySize} {parseInt(partySize) === 1 ? 'person' : 'people'}
             </p>

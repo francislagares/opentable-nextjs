@@ -1,8 +1,10 @@
+import Image from 'next/image';
+import Link from 'next/link';
+
 import Price from '@/app/components/Price';
 import Stars from '@/app/components/Stars';
 import { Restaurant } from '@/app/models/restaurant';
 import { calculateReviewRatingAverage } from '@/app/utils/calculateReviewRatingAverage';
-import Link from 'next/link';
 
 interface RestaurantCard {
   restaurant: Restaurant;
@@ -20,7 +22,13 @@ const RestaurantCard = ({ restaurant }: RestaurantCard) => {
 
   return (
     <div className='border-b flex pb-5 ml-4'>
-      <img src={restaurant?.mainImage} alt='' className='w-44 h-36 rounded' />
+      <Image
+        src={restaurant?.mainImage}
+        alt=''
+        width={500}
+        height={500}
+        className='w-44 h-36 rounded'
+      />
       <div className='pl-5'>
         <h2 className='text-3xl'>{restaurant.name}</h2>
         <div className='flex items-start'>

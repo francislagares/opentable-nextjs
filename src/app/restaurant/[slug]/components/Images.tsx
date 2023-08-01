@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const Images = ({ images }: { images: string[] }) => {
   return (
     <div>
@@ -6,7 +8,14 @@ const Images = ({ images }: { images: string[] }) => {
       } photo${images.length > 1 ? 's' : ''}`}</h1>
       <div className='flex flex-wrap'>
         {images.map((image, index) => (
-          <img src={image} className='w-56 h-44 mr-1 mb-1' />
+          <Image
+            key={index}
+            src={image}
+            alt=''
+            width={500}
+            height={500}
+            className='w-56 h-44 mr-1 mb-1'
+          />
         ))}
       </div>
     </div>

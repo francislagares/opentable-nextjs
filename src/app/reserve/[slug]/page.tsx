@@ -36,10 +36,7 @@ const Reserve = async ({
   params: { slug: string };
   searchParams: { date: string; partySize: string };
 }) => {
-  const { slug } = params;
-  console.log(searchParams);
-
-  const restaurant = await fetchRestaurantBySlug(slug);
+  const restaurant = await fetchRestaurantBySlug(params.slug);
 
   return (
     <div className='border-t h-screen'>
@@ -50,7 +47,11 @@ const Reserve = async ({
           date={searchParams.date}
           partySize={searchParams.partySize}
         />
-        <Form />
+        <Form
+          partySize={searchParams.partySize}
+          slug={params.slug}
+          date={searchParams.date}
+        />
       </div>
     </div>
   );

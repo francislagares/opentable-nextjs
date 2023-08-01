@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { Restaurant } from '@/app/models/restaurant';
@@ -13,7 +14,13 @@ const RestaurantCard = ({ restaurant }: Props) => {
   return (
     <div className='w-64 h-72 m-3 rounded overflow-hidden border cursor-pointer'>
       <Link href={`/restaurant/${restaurant.slug}`}>
-        <img src={restaurant.mainImage} alt='' className='w-full h-36' />
+        <Image
+          src={restaurant.mainImage}
+          alt={restaurant.name}
+          width={500}
+          height={500}
+          className='w-full h-36'
+        />
         <div className='p-1'>
           <h3 className='font-bold text-2xl mb-2'>{restaurant.name}</h3>
           <div className='flex items-start'>
