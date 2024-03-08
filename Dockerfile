@@ -1,46 +1,38 @@
-ARG NODE=alpine:latest
+FROM node:21-alpine AS deps
 
-# Stage 1: Install dependencies
-FROM ${NODE} AS deps
-
-RUN apk update && apk add --no-cache libc6-compat nodejs yarn
+RUN apk update && apk add --no-cache libc6-compat nodejs-current && corepack enable
 
 WORKDIR /app
-
-ENV NEXT_TELEMETRY_DISABLED 1
 
 COPY package.json .
 
-RUN if [ -f "yarn.lock" ]; then COPY yarn.lock ./; fi
-RUN yarn set version stable
+RUN pnpm install
 
 COPY . .
 
-RUN yarn install --silent
-
 EXPOSE 3000
 
-# Serve the app
-CMD ["yarn", "dev"]
+CMD [ "pnpm", "dev" ]
 
 # Stage 2: Build the app
-FROM ${NODE} AS builder
+FROM node:21-alpine AS builder
 
-RUN apk update && apk add --no-cache libc6-compat nodejs yarn
+RUN apk update && apk add --no-cache libc6-compat nodejs-current && corepack enable
 
 WORKDIR /app
+
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-RUN yarn build
+RUN pnpm build
 
 # Stage 3: Run the production
-FROM ${NODE} AS runner
+FROM node:21-alpine AS runner
 
-RUN apk update && apk add --no-cache libc6-compat nodejs yarn
+RUN apk update && apk add --no-cache libc6-compat nodejs-current && corepack enable
 
 WORKDIR /app
 
@@ -62,4 +54,4 @@ EXPOSE 3000
 ENV PORT 3000
 
 # Serve the app
-CMD ["node", "server.js"]
+CMD ["pnpm", "start"]

@@ -7,7 +7,12 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ['resizer.otstatic.com'],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'resizer.otstatic.com',
+      },
+    ],
   },
 
   async headers() {
@@ -33,4 +38,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
